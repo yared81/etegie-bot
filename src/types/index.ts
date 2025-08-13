@@ -9,6 +9,17 @@ export interface Message {
 }
 
 /**
+ * PDF Document interface
+ */
+export interface PDFDocument {
+  id: string;
+  name: string;
+  content: string;
+  uploadedAt: Date;
+  size: number;
+}
+
+/**
  * Chatbot configuration interface
  */
 export interface ChatbotConfig {
@@ -21,6 +32,10 @@ export interface ChatbotConfig {
   theme?: 'light' | 'dark' | 'auto';
   primaryColor?: string;
   maxMessages?: number;
+  className?: string;
+  style?: React.CSSProperties;
+  enablePDFUpload?: boolean;
+  enableLocalStorage?: boolean;
 }
 
 /**

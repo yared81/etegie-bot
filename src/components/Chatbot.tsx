@@ -1,30 +1,19 @@
-'use client';
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { format } from 'date-fns';
-import { Send, Bot, User, MessageCircle, X, Minimize2, Maximize2 } from 'lucide-react';
+import { Send, Minimize2, Maximize2, X, Bot, User, MessageCircle } from 'lucide-react';
+import type { Message, ChatbotConfig } from '../types';
 
 // Custom styles for animations and scrollbar
 const customStyles = `
+  @keyframes etegie-slide-up {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
   @keyframes etegie-bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
     40% { transform: translateY(-10px); }
     60% { transform: translateY(-5px); }
   }
-  @keyframes etegie-slide-up {
-    from { opacity: 0; transform: translateY(20px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  @keyframes etegie-typing {
-    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-    40% { transform: scale(1); opacity: 1; }
-  }
-  .etegie-typing-indicator span {
-    animation: etegie-typing 1.4s infinite ease-in-out;
-  }
-  .etegie-typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-  .etegie-typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-  .etegie-typing-indicator span:nth-child(3) { animation-delay: 0s; }
   .etegie-messages::-webkit-scrollbar { width: 6px; }
   .etegie-messages::-webkit-scrollbar-track { background: transparent; }
   .etegie-messages::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
@@ -32,27 +21,6 @@ const customStyles = `
   .dark .etegie-messages::-webkit-scrollbar-thumb { background: #4b5563; }
   .dark .etegie-messages::-webkit-scrollbar-thumb:hover { background: #6b7280; }
 `;
-
-interface Message {
-  id: string;
-  content: string;
-  sender: 'user' | 'bot';
-  timestamp: Date;
-}
-
-interface ChatbotProps {
-  apiUrl: string;
-  botName?: string;
-  welcomeMessage?: string;
-  companyId?: string;
-  showAvatars?: boolean;
-  showTimestamps?: boolean;
-  theme?: 'light' | 'dark' | 'auto';
-  primaryColor?: string;
-  maxMessages?: number;
-  className?: string;
-  style?: React.CSSProperties;
-}
 
 export function Chatbot({
   apiUrl,
@@ -66,7 +34,7 @@ export function Chatbot({
   maxMessages = 100,
   className = '',
   style = {}
-}: ChatbotProps) {
+}: ChatbotConfig) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -204,7 +172,7 @@ export function Chatbot({
     <>
       <style dangerouslySetInnerHTML={{ __html: customStyles }} />
       <div
-        className={`fixed bottom-5 right-5 z-50 font-sans ${className}`}
+        className={`fixed bottom-6 right-6 z-50 font-sans ${className}`}
         style={{
           '--tw-primary-color': primaryColor,
           ...style
@@ -213,49 +181,47 @@ export function Chatbot({
         {/* Floating Button */}
         {!isOpen && (
           <button
-            className="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white border-none cursor-pointer flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-105 hover:shadow-3xl"
+            className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-none cursor-pointer flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 hover:shadow-3xl"
             style={{ animation: 'etegie-bounce 2s infinite' }}
             onClick={toggleChat}
             aria-label="Open chat"
           >
-            <MessageCircle size={24} />
+            <MessageCircle size={28} />
           </button>
         )}
 
-        {/* Chat Window */}
+        {/* Chat Window - Modern Vertical Conversation UI */}
         {isOpen && (
           <div 
-            className={`w-96 h-[500px] bg-white dark:bg-gray-800 rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700 ${isMinimized ? 'h-16' : ''}`}
+            className={`w-[380px] h-[600px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700 ${isMinimized ? 'h-20' : ''}`}
             style={{ animation: 'etegie-slide-up 0.3s ease-out' }}
           >
             {/* Header */}
-            <div className="bg-blue-500 text-white px-5 py-4 flex items-center justify-between min-h-16">
-              <div className="flex items-center gap-3 flex-1">
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
                 {showAvatars && (
-                  <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                     <Bot size={20} />
                   </div>
                 )}
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-semibold leading-tight whitespace-nowrap overflow-hidden text-ellipsis m-0">
-                    {botName}
-                  </h3>
-                  <span className="text-xs opacity-90 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block"></span>
+                <div>
+                  <h3 className="text-lg font-semibold leading-tight">{botName}</h3>
+                  <span className="text-sm opacity-90 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                     Online
                   </span>
                 </div>
               </div>
               <div className="flex gap-2">
                 <button
-                  className="w-7 h-7 bg-white/10 hover:bg-white/20 border-none rounded-md text-white cursor-pointer flex items-center justify-center transition-all duration-200 hover:scale-105"
+                  className="w-8 h-8 bg-white/10 hover:bg-white/20 border-none rounded-lg text-white cursor-pointer flex items-center justify-center transition-all duration-200 hover:scale-105"
                   onClick={function() { setIsMinimized(!isMinimized); }}
                   aria-label={isMinimized ? 'Maximize' : 'Minimize'}
                 >
                   {isMinimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
                 </button>
                 <button
-                  className="w-7 h-7 bg-white/10 hover:bg-white/20 border-none rounded-md text-white cursor-pointer flex items-center justify-center transition-all duration-200 hover:scale-105"
+                  className="w-8 h-8 bg-white/10 hover:bg-white/20 border-none rounded-lg text-white cursor-pointer flex items-center justify-center transition-all duration-200 hover:scale-105"
                   onClick={function() { setIsOpen(false); }}
                   aria-label="Close chat"
                 >
@@ -264,66 +230,76 @@ export function Chatbot({
               </div>
             </div>
 
-            {/* Messages */}
+            {/* Messages - Vertical Conversation Layout */}
             {!isMinimized && (
               <>
                 <div 
-                  className="flex-1 overflow-y-auto p-5 flex flex-col gap-4 bg-white dark:bg-gray-800 etegie-messages"
+                  className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-gray-50 dark:bg-gray-900 etegie-messages"
                 >
                   {limitedMessages.map(function(message) {
+                    const isUser = message.sender === 'user';
                     return (
                       <div
                         key={message.id}
-                        className={`flex gap-3 max-w-full ${message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+                        className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}
                       >
-                        {showAvatars && (
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
-                            message.sender === 'user' 
-                              ? 'bg-blue-500 text-white' 
-                              : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
-                          }`}>
-                            {message.sender === 'user' ? <User size={16} /> : <Bot size={16} />}
+                        {/* Bot Avatar (left side) */}
+                        {!isUser && showAvatars && (
+                          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <Bot size={16} className="text-white" />
                           </div>
                         )}
-                        <div className="flex-1 min-w-0">
-                          <div className={`px-4 py-3 rounded-lg text-sm leading-relaxed break-words max-w-full ${
-                            message.sender === 'user'
-                              ? 'bg-blue-500 text-white'
-                              : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
+                        
+                        {/* Message Bubble */}
+                        <div className={`max-w-[280px] ${isUser ? 'order-2' : 'order-1'}`}>
+                          <div className={`px-4 py-3 rounded-2xl text-sm leading-relaxed break-words ${
+                            isUser
+                              ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-br-md'
+                              : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-bl-md shadow-sm'
                           }`}>
                             {message.content}
                           </div>
                           {showTimestamps && (
-                            <div className={`text-xs text-gray-500 mt-1 ${
-                              message.sender === 'user' ? 'text-left' : 'text-right'
+                            <div className={`text-xs text-gray-500 mt-2 font-medium ${
+                              isUser ? 'text-right' : 'text-left'
                             }`}>
                               {format(message.timestamp, 'HH:mm')}
                             </div>
                           )}
                         </div>
+
+                        {/* User Avatar (right side) */}
+                        {isUser && showAvatars && (
+                          <div className="w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <User size={16} className="text-white" />
+                          </div>
+                        )}
                       </div>
                     );
                   })}
+                  
+                  {/* Typing Indicator */}
                   {isLoading && (
-                    <div className="flex gap-3 max-w-full flex-row">
+                    <div className="flex gap-3 justify-start">
                       {showAvatars && (
-                        <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-1 bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300">
-                          <Bot size={16} />
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                          <Bot size={16} className="text-white" />
                         </div>
                       )}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex gap-1 px-4 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg w-fit etegie-typing-indicator">
-                          <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-                          <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-                          <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                      <div className="px-4 py-3 bg-white dark:bg-gray-800 rounded-2xl rounded-bl-md border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <div className="flex gap-1">
+                          <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
+                          <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
+                          <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
                         </div>
                       </div>
                     </div>
                   )}
+                  
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Input */}
+                {/* Input - Sticky Bottom */}
                 <form className="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex gap-3 items-center" onSubmit={handleSubmit}>
                   <input
                     ref={inputRef}
@@ -332,12 +308,12 @@ export function Chatbot({
                     onChange={function(e) { setInputValue(e.target.value); }}
                     onKeyPress={handleKeyPress}
                     placeholder="Type your message..."
-                    className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed placeholder-gray-500 dark:placeholder-gray-400"
+                    className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed placeholder-gray-500 dark:placeholder-gray-400"
                     disabled={isLoading}
                   />
                   <button
                     type="submit"
-                    className="w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white border-none rounded-lg cursor-pointer flex items-center justify-center transition-all duration-200 flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 disabled:hover:scale-100"
+                    className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-none rounded-xl cursor-pointer flex items-center justify-center transition-all duration-200 flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 disabled:hover:scale-100 shadow-lg"
                     disabled={!inputValue.trim() || isLoading}
                     aria-label="Send message"
                   >

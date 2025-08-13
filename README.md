@@ -33,7 +33,6 @@ Etegie Bot is a **professional-grade chatbot system** designed for modern web ap
 ### 1. Installation
 
 ```bash
-since it is deployed on npm you can install in the working project
 npm install etegie-bot
 ```
 
@@ -244,4 +243,21 @@ etegie-bot/
 ├── tsconfig.json
 └── README.md
 ```
+
+## 🧪 **Testing**
+
+The package includes comprehensive TypeScript types and is tested with:
+- React 18+
+- Next.js 13+
+- TypeScript 5.0+
+- Supabase 2.x
+
+## 🤝 **Contributing**
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
  

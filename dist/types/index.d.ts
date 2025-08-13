@@ -4,6 +4,13 @@ export interface Message {
     sender: 'user' | 'bot';
     timestamp: Date;
 }
+export interface PDFDocument {
+    id: string;
+    name: string;
+    content: string;
+    uploadedAt: Date;
+    size: number;
+}
 export interface ChatbotConfig {
     apiUrl: string;
     companyId: string;
@@ -14,6 +21,10 @@ export interface ChatbotConfig {
     theme?: 'light' | 'dark' | 'auto';
     primaryColor?: string;
     maxMessages?: number;
+    className?: string;
+    style?: React.CSSProperties;
+    enablePDFUpload?: boolean;
+    enableLocalStorage?: boolean;
 }
 export interface Company {
     id: string;
