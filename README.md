@@ -33,6 +33,7 @@ Etegie Bot is a **professional-grade chatbot system** designed for modern web ap
 ### 1. Installation
 
 ```bash
+since it is deployed on npm you can install in the working project
 npm install etegie-bot
 ```
 
