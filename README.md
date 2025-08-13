@@ -243,34 +243,4 @@ etegie-bot/
 ├── tsconfig.json
 └── README.md
 ```
-
-## 🧪 **Testing**
-
-The package includes comprehensive TypeScript types and is tested with:
-- React 18+
-- Next.js 13+
-- TypeScript 5.0+
-- Supabase 2.x
-
-## 🤝 **Contributing**
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 **License**
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🆘 **Support**
-
-For support and questions:
-- Create an issue on GitHub
-- Check the documentation
-- Review the examples
-
----
-
-**Built with ❤️ for the hackathon community**
+ 
