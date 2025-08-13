@@ -1,0 +1,37 @@
+{
+  "name": "etegie-bot",
+  "version": "1.0.0",
+  "description": "A beautiful, professional chatbot system for Next.js with Supabase backend",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chatbot",
+    "nextjs",
+    "supabase",
+    "react",
+    "chat",
+    "faq",
+    "customer-support"
+  ],
+  "author": "Etegie Team",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "date-fns": "^2.30.0",
+    "lucide-react": "^0.294.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}
