@@ -22,7 +22,7 @@ npm install etegie-bot
 ```
 
 ### 2. Basic Usage
-
+git 
 ```tsx
 import { Chatbot } from 'etegie-bot';
 
