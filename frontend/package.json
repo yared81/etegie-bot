@@ -1,0 +1,65 @@
+{
+  "name": "etegie-bot",
+  "version": "1.2.9",
+  "description": "A beautiful, professional chatbot system for Next.js with Supabase backend - Fixed React hooks compatibility and improved TypeScript support",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "chatbot",
+    "nextjs",
+    "supabase",
+    "react",
+    "chat",
+    "faq",
+    "customer-support",
+    "typescript",
+    "ui",
+    "component",
+    "hooks",
+    "compatible",
+    "professional",
+    "enterprise"
+  ],
+  "author": "Etegie Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etegie-team/etegie-bot.git"
+  },
+  "homepage": "https://github.com/etegie-team/etegie-bot#readme",
+  "bugs": {
+    "url": "https://github.com/etegie-team/etegie-bot/issues"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "lodash": "^4.17.23"
+  },
+  "peerDependencies": {
+    "lucide-react": "^0.294.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.23",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.3.3"
+  }
+}

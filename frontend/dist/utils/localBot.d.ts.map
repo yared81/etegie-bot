@@ -1,0 +1,1 @@
+{"version":3,"file":"localBot.d.ts","sourceRoot":"","sources":["../../src/utils/localBot.ts"],"names":[],"mappings":"AAEA,MAAM,WAAW,WAAW;IAC1B,QAAQ,EAAE,MAAM,CAAC;IACjB,MAAM,CAAC,EAAE,MAAM,CAAC;CACjB;AAKD,qBAAa,QAAQ;WAMN,cAAc,CAAC,OAAO,EAAE,MAAM,GAAG,OAAO,CAAC,WAAW,CAAC;CAyBnE"}

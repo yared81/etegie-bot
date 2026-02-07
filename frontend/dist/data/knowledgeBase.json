@@ -1,0 +1,39 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": ["hello", "hi", "hey", "good morning", "good afternoon"],
+            "responses": [
+                "Hello! How can I help you today?",
+                "Hi there! Welcome to Etegie Bot support.",
+                "Greetings! How may I assist you?"
+            ]
+        },
+        {
+            "tag": "capabilities",
+            "patterns": ["what can you do", "help", "features", "how do you work"],
+            "responses": [
+                "I can answer your questions based on my knowledge base, help you navigate the system, and provide support.",
+                "I'm designed to assist with customer inquiries and provide information about our services."
+            ]
+        },
+        {
+            "tag": "pricing",
+            "patterns": ["price", "cost", "how much", "subscription", "plans"],
+            "responses": [
+                "Our pricing starts at $10/month for the Basic plan. We also have Professional and Enterprise options.",
+                "You can find detailed pricing information on our website's pricing page."
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["bye", "goodbye", "see you later", "thanks", "thank you"],
+            "responses": [
+                "You're welcome! Have a great day!",
+                "Goodbye! Feel free to return if you have more questions.",
+                "Happy to help! See you next time."
+            ]
+        }
+    ],
+    "fallback": "I'm sorry, I don't have information on that topic. Could you please rephrase or ask something else?"
+}

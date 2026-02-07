@@ -1,0 +1,1 @@
+{"version":3,"file":"CompanySetup.d.ts","sourceRoot":"","sources":["../../src/components/CompanySetup.tsx"],"names":[],"mappings":"AAKA,UAAU,gBAAgB;IACxB,WAAW,EAAE,MAAM,CAAC;IACpB,kBAAkB,EAAE,MAAM,CAAC;IAC3B,QAAQ,EAAE,MAAM,CAAC;CAClB;AAED,UAAU,iBAAiB;IACzB,eAAe,CAAC,EAAE,CAAC,IAAI,EAAE,gBAAgB,KAAK,IAAI,CAAC;CACpD;AAKD,wBAAgB,YAAY,CAAC,EAAE,eAAe,EAAE,EAAE,iBAAiB,2CA6NlE"}
