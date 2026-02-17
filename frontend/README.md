@@ -33,7 +33,7 @@ export default function MyPage() {
       
       <Chatbot 
         apiUrl="/api/chat"
-        companyId="your-company-id"
+        companyId="Company name"
         botName="My Assistant"
         welcomeMessage="Hello! How can I help you today?"
       />
