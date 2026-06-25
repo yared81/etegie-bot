@@ -8,10 +8,11 @@ This repository contains the complete Etegie Bot system, including the core libr
 
 ```text
 etegie-chatbot/
+├── apps/
+│   ├── api-server/         # Express & SQLite Backend (RAG Engine)
+│   └── demo-website/       # Next.js Application testing the widget
 ├── packages/
-│   └── etegie-bot/         # Core Chatbot System (Frontend & Backend)
-├── examples/
-│   └── testing-bot/        # Sample Next.js project showing implementation
+│   └── react-widget/       # Core Chatbot UI (NPM Package)
 ├── docs/
 │   └── setup-guide.md      # Detailed local development instructions
 └── LICENSE                 # MIT License details
@@ -19,25 +20,30 @@ etegie-chatbot/
 
 ## 🚀 Quick Start
 
-### 1. Core Package
-The core package is divided into a **React/Next.js Frontend** and an **Express Backend**.
+This project uses NPM Workspaces. You can run all development servers with a single command once configured.
+
+### 1. Installation
 
 ```bash
-cd packages/etegie-bot
-# See individual READMEs inside for configuration
+npm run install:all
 ```
 
-### 2. Testing App (Demo)
-We have included a pre-configured Next.js app to help you get started quickly.
+### 2. Running the Development Environment
+
+You can start the different parts of the suite using the NPM scripts in the root directory:
 
 ```bash
-cd examples/testing-bot
-cp .env.example .env     # Then add your Supabase credentials
-npm install
-npm run dev
+# Start the Backend API Server (Port 5000)
+npm run dev:api
+
+# Start the Next.js Demo Website (Port 3000)
+npm run dev:demo
+
+# Continuously build the React Widget package
+npm run dev:widget
 ```
 
 ## 🛠️ Tech Stack
 -   **Frontend**: React 18+, TypeScript, Tailwind CSS, Lucide React
--   **Backend**: Node.js, Express, Supabase (optional integration)
--   **Routing**: Next.js App Router (Library) & Pages Router (Demo)
+-   **Backend**: Node.js, Express, SQLite, Google Gemini API
+-   **Architecture**: NPM Workspaces Monorepo
