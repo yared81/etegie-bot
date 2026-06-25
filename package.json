@@ -1,0 +1,17 @@
+{
+  "name": "etegie-chatbot-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NPM Monorepo for Etegie Bot and its Demo Applications",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev:widget": "npm run dev --workspace=packages/react-widget",
+    "dev:demo": "npm run dev --workspace=apps/demo-website",
+    "dev:api": "npm run dev --workspace=apps/api-server",
+    "build:widget": "npm run build --workspace=packages/react-widget"
+  }
+}

@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "etegie-bot": "file:../etegie-bot/frontend",
+    "etegie-bot": "*",
     "lucide-react": "^0.294.0",
     "next": "13.5.11",
     "react": "18.2.0",
